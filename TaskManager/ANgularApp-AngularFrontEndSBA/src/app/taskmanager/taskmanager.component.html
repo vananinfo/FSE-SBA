@@ -1,0 +1,72 @@
+
+
+<div class="container" style="text-align: center">
+        <table class="table table-responsive table-bordered">
+            <tr>
+                <td colspan="8"><h2>View Task</h2></td>
+            </tr>
+            <tr>
+              <td>Task</td>
+              <td colspan="3">
+              <input type="text" [(ngModel)]="task" class="form-control"  (keyup)='TaskSearch()'>
+              </td>
+              <td> Parent</td>
+              <td colspan="3">
+                <input type="text" [(ngModel)]="parent" class="form-control"  (keyup)='ParentSearch()'>
+              </td>
+            </tr>
+            <tr>
+                <td>Priority From</td>
+                <td>
+                <input type="text" [(ngModel)]="priorityfrom" class="form-control"  (keyup)='PriorityFromSearch()'>
+                </td>
+                <td> Priority To</td>
+                <td>
+                  <input type="text" [(ngModel)]="priorityto" class="form-control"  (keyup)='PriorityToSearch()'>
+                </td>
+                <td>Start Date</td>
+                <td>
+                <input type="date" [(ngModel)]="startdate" class="form-control" onchange="StartDateSearch()"  (keyup)='StartDateSearch()'>
+                <p style="font-size:11px" ><i>Press ENTER to search</i></p>
+                </td>
+                <td>End Date</td>
+                <td>
+                <input type="date" [(ngModel)]="enddate" class="form-control" onchange="EndDateSearch()"  (keyup)='EndDateSearch()'>
+                <p style="font-size:11px" ><i>Press ENTER to search</i></p>
+                </td>
+              </tr>
+          </table>
+  
+
+<table class="table table-{1:striped|sm|bordered|hover|inverse} table-inverse table-responsive table-hover outerborder" style="display: table;">
+    <thead class="thead-inverse|thead-default">
+        <tr>
+            <th>Task<span class="btn btn-success" (click)='sortbytask("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-success" (click)='sortbytask("desc")'>v</span></th>
+            <th>Parent<span class="btn btn-success" (click)='sortbyparent("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-success" (click)='sortbyparent("desc")'>v</span></th>
+            <th>Priority<span class="btn btn-success" (click)='sortbypriority("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-success" (click)='sortbypriority("desc")'>v</span></th>
+            <th>Start<span class="btn btn-success" (click)='sortbystartdate("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-success" (click)='sortbystartdate("desc")'>v</span></th>
+            <th>End<span class="btn btn-success" (click)='sortbyenddate("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-success" (click)='sortbyenddate("desc")'>v</span></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let obj of taskdata" >
+                <td scope="row">{{obj.task}}</td>
+                <td>{{obj.parent_task}}</td>
+                <td>{{obj.priority}}</td>
+                <td>{{obj.start_date|date:'MM/dd/yyyy'}}</td>
+                <td>{{obj.end_date | date:'MM/dd/yyyy'}}</td>
+                
+                <td> <button class="btn btn-success" id='Edit' [disabled]="checkButtonEnable(obj.taskended)" (click)="EditTask(obj)" >Edit</button> </td>
+                <td> <button class="btn btn-success" id='EndTask' [disabled]="checkButtonEnable(obj.taskended)"  (click)="EndTask(obj.task_id)" >End Task</button> </td>
+                <td></td>
+            </tr>            
+        </tbody>
+</table>
+<style>
+    thead{
+        background-color: lightblue;
+    }
+    </style>
+</div>
